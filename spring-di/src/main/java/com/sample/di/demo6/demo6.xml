@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="goodbye" class="com.sample.di.demo6.Goodbye"></bean>
+	<bean id="goodmorning" class="com.sample.di.demo6.Goodmorning"></bean>
+		<!-- Setter Injection
+			setter 메소드를 정의하고, 
+			<property/> 태그를 사용해서 setter 메소드를 선택한 다음, 조립된 빈을 지정한다.
+		 -->
+	<bean id="messageservice" class="com.sample.di.demo6.MessageService">
+		<property name="bye" ref="goodbye"></property>
+		<property name="morning" ref="goodmorning"></property>
+	</bean>
+
+
+
+
+
+
+
+
+		<!-- 
+			Constructor Injection
+				   메소드를 정의하고,
+				<constructor-arg /> 태그를 사용해서 조립될 빈을 지정한다.
+		 -->
+		 <bean id="messageService2" class="com.sample.di.demo6.MessageService">
+		 	<!-- index를 사용해서 주입하기(타입똑같을때는 index로 순서를  지정해준다)
+		 	<constructor-arg index="0" ref="goodmorning"></constructor-arg>
+		 	<constructor-arg index="1" ref="goodbye"></constructor-arg>
+		 	 -->
+		 	<constructor-arg ref="goodmorning"></constructor-arg>
+		 	<constructor-arg ref="goodbye"></constructor-arg>
+		 	
+		 </bean>
+		 
+		 <!-- 기본생성자의 매개변수 개수와 constructor-arg 개수는 일치한다.-->
+		 
+</beans>

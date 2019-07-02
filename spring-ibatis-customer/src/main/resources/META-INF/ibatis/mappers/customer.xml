@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+	
+<sqlMap>
+	<!-- SQL 정의 -->
+	<select id="getAllCustomers" resultClass="kr.co.jhta.vo.Customer">
+		SELECT 
+				A.CUST_NO 	as no, 
+				A.CUST_NAME  as name, 
+				A.CUST_PHONE as phone
+		FROM 
+				TB_CUSTOMERS A
+	</select>
+	<select id="getCustomerByNo" resultClass="kr.co.jhta.vo.Customer">
+	SELECT 
+			A.CUST_NO as no, 
+			A.CUST_NAME as name, 
+			A.CUST_PHONE as phone
+	FROM 
+			TB_CUSTOMERS A
+	WHERE 
+			A.CUST_NO=#VALUE#
+	</select>
+	<insert id="insertCustomer" parameterClass="kr.co.jhta.vo.Customer" >
+		INSERT INTO TB_CUSTOMERS(
+					CUST_NO no,
+					CUST_NAME name, 
+					CUST_NICKNAME nickname, 
+					CUST_PHONE phone, 
+					CUST_EMAIL email, 
+					CUST_ADDRESS address, 
+					CUST_POINT point)
+		VALUES(
+		CUSTOMER_SEQ.nextval, 
+		#name#,
+		#nickname#,
+		#phone#, 
+		#email#,
+		#address#,
+		0)
+	</insert>
+	
+	<update id="updateCustomer" parameterClass="kr.co.jhta.vo.Customer">
+		UPDATE 
+				TB_CUSTOMERS
+		SET
+				CUST_NAME=#name#,
+				CUST_NICKNAME=#nickname#,
+				CUST_PHONE=#phone#,
+				CUST_EMAIL=#email#,
+				CUST_ADDRESS=#address#,
+				CUST_POINT=#point#
+		WHERE 
+				CUST_NO=#no#
+	</update>
+	
+	
+
+	
+</sqlMap>
